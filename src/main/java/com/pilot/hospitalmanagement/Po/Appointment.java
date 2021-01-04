@@ -1,7 +1,16 @@
 package com.pilot.hospitalmanagement.Po;
 
+import lombok.*;
+import lombok.extern.log4j.Log4j;
+
 import java.util.Date;
 
+@Data
+@Setter
+@Getter
+@Log4j
+@NoArgsConstructor
+@AllArgsConstructor
 public class Appointment {
     private String aID;    //预约ID
     private User aUser;    //发起预约的用户

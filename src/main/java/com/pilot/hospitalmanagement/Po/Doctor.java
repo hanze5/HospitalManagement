@@ -1,7 +1,15 @@
 package com.pilot.hospitalmanagement.Po;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import lombok.*;
+import lombok.extern.log4j.Log4j;
 
+@Data
+@Setter
+@Getter
+@Log4j
+@NoArgsConstructor
+@AllArgsConstructor
 public class Doctor extends User{
 
     private String room;       //所属科室

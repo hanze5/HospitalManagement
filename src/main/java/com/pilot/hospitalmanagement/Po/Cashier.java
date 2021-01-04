@@ -1,5 +1,14 @@
 package com.pilot.hospitalmanagement.Po;
 
-public class Cashier {
+import lombok.*;
+import lombok.extern.log4j.Log4j;
+
+@Data
+@Setter
+@Getter
+@Log4j
+//@NoArgsConstructor
+@AllArgsConstructor
+public class Cashier extends User{
 
 }

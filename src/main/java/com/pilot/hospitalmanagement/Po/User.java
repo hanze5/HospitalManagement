@@ -1,6 +1,15 @@
 package com.pilot.hospitalmanagement.Po;
 
 
+import lombok.*;
+import lombok.extern.log4j.Log4j;
+
+@Data
+@Setter
+@Getter
+@Log4j
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     private String userID;
@@ -10,5 +19,9 @@ public class User {
     private String userGender;
     private String userBirthday;
     private String userTel;
+
+
+
+
 
 }
