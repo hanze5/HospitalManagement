@@ -1,6 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+<!--       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">-->
 
-</beans>
+<!--</beans>-->
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pilot.hospitalmanagement.dao.IDocDao">
+    <resultMap id="DocResultMap" type="com.pilot.hospitalmanagement.Po.Doc">
+        <id column="docID" jdbcType="VARCHAR" property="docID" />
+        <result column="docRoom" jdbcType="VARCHAR" property="docRoom" />
+        <result column="docUserSay" jdbcType="VARCHAR" property="docUserSay" />
+        <result column="docCreatTime" jdbcType="DATE" property="docCreatTime" />
+        <result column="docFinishTime" jdbcType="DATE" property="docFinishTime" />
+        <result column="docStatus" jdbcType="VARCHAR" property="docStatus" />
+
+    </resultMap>
+
+
+
+<!--增加一条病历记录-->
+    <insert id="insert" parameterType="com.pilot.hospitalmanagement.Po.Doc">
+        insert into Doc (docID, docRoom, docUserSay,
+                         docCreatTime, docFinishTime, docStatus)
+        values (#{docID,jdbcType=VARCHAR}, #{docRoom,jdbcType=VARCHAR}, #{docUserSay,jdbcType=VARCHAR},
+                #{docCreatTime,jdbcType=DATE}, #{docFinishTime,jdbcType=DATE}, #{docStatus,jdbcType=VARCHAR}
+               )
+    </insert>
+
+<!--    按ID删除病历-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from Doc
+        where docID = #{docID,jdbcType=VARCHAR}
+    </delete>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.pilot.hospitalmanagement.Po.Doc">
+        update Doc
+        <set>
+            <if test="docRoom != null">
+                docRoom = #{docRoom,jdbcType=VARCHAR},
+            </if>
+            <if test="docUserSay != null">
+                docUserSay = #{docUserSay,jdbcType=VARCHAR},
+            </if>
+            <if test="docCreatTime != null">
+                docCreatTime = #{docCreatTime,jdbcType=DATE},
+            </if>
+            <if test="docFinishTime != null">
+                docFinishTime = #{docFinishTime,jdbcType=DATE},
+            </if>
+            <if test="docStatus!= null">
+                docStatus = #{docStatus,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where docID = #{docID,jdbcType=VARCHAR}
+    </update>
+    
+<!--    按照病历ID查询病历-->
+    <sql id="Base_Column_List">
+        docID, docRoom, docUserSay
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="DocResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from Doc
+        where docID =#{docID,jdbcType=VARCHAR}
+    </select>
+
+
+
+
+
+</mapper>
